@@ -1,4 +1,4 @@
-import { Button, Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import { Badge, Button, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import defaultIMG from '../img/DefaultIMGAdvert.png'
 
@@ -11,9 +11,9 @@ function AdvertDetail() {
             <Col>            
             <h1>Sony PlayStation 5</h1>
             <hr/>
-            <h3>900</h3>
-            <h4>Compra</h4>
-            <h5>Electronicos</h5>
+            <h3>$900</h3>
+            <Badge variant="warning">Compra</Badge>
+            <Badge variant="info">Electrónicos</Badge>
             </Col>
             <Col>
             <img src={defaultIMG} className="App-logo" alt="logo" />
