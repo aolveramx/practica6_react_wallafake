@@ -1,8 +1,9 @@
+import Advert from './Advert'
 import { Badge, Button, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import defaultIMG from '../img/DefaultIMGAdvert.png'
 
-function AdvertDetail() {
+const AdvertDetail = ({ adverts }) => {
   return (
     <div>
       <Jumbotron>

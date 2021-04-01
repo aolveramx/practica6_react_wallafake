@@ -70,12 +70,11 @@ const RegisterPage = ({ onRegister }) => {
         <Col className="m-3">
           <Row>
             <p className="mr-3">Ya estas registrado?</p>
-            <Link to="/LoginPage">
+            <Link to="/login">
               <Button variant="secondary">Inicia Sesión</Button>
             </Link>
           </Row>
         </Col>
-        
       </Form>
     </Container>
   )

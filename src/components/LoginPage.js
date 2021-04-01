@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Button, ButtonGroup, Container, Form } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const LoginPage = ({ onLogin }) => {
   const [user, setUser] = useState('');
@@ -19,7 +20,7 @@ const LoginPage = ({ onLogin }) => {
 
     setUser('');
     setPassword('');
-    setReminder(false);
+    // setReminder(false);
   };
 
 
@@ -50,21 +51,27 @@ const LoginPage = ({ onLogin }) => {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group>
-          <Form.Check 
-          type={'checkbox'}
-          label={'Recordar Acceso'}
-          checked={reminder}
-          value={reminder}
-          onChange={ (e) => setReminder(e.currentTarget.checked) }
-          />
-        </Form.Group>
+        <Form.Check
+        className="mb-3" 
+        type="switch"
+        label="Recordar Acceso"
+        checked={reminder}
+        value={reminder}
+        onChange={(e) => setReminder(e.currentTarget.checked) }
+        />
 
-        <Button 
+        <ButtonGroup>
+          <Button variant="primary" type="submit">Entrar</Button>
+          <Link to="/signup">
+            <Button variant="secondary">Registrarse</Button>
+          </Link>
+        </ButtonGroup>
+
+        {/* <Button 
         variant="primary" 
         type="submit">
-        Login
-        </Button>
+        Inicia Sesión
+        </Button> */}
 
       </Form>
     </Container>
