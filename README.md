@@ -33,3 +33,45 @@ npm start
 ```
 
 7- Comienza a interactuar con el usuario @tweeterman 1234, haciendo login y podras ver, crear y borrar anuncios.
+
+8-Credenciales
+
+{
+"email": "me@me.com",
+"password": "1234",
+"username": "camilo",
+"name": "camilo"
+}
+
+    {
+      name: 'Sony PlayStation 5',
+      sale: true,
+      price: 900,
+      tags: 'lifestyle',
+      userId: 1,
+      id: 1
+    },
+    {
+      name: "Apple iPhone 12 Pro Max",
+      sale: false,
+      price: 1319,
+      tags: 'work',
+      userId: 1,
+      id: 2
+    },
+    {
+      name: 'Google Pixel 4a',
+      sale: true,
+      price: 999,
+      tags: 'mobile',
+      userId: 1,
+      id: 3
+    },
+    {
+      name: 'Ford Mustang 1966 Convertible',
+      sale: false,
+      price: 105000,
+      tags: 'motor',
+      userId: 1,
+      id: 4
+    }

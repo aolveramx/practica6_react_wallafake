@@ -66,10 +66,10 @@ const NewAdvert = ({ onAdd }) => {
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             >
-              <option>Electrónicos</option>
-              <option>Ropa</option>
-              <option>Movilidad</option>
-              <option>Música</option>
+              <option>lifestyle</option>
+              <option>mobile</option>
+              <option>motor</option>
+              <option>work</option>
             </Form.Control>
             </Form.Group>
 

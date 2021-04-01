@@ -1,5 +1,6 @@
-import { Button, Jumbotron } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom'
+import { Button, Jumbotron } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function NotFound404() {
   return (
@@ -11,7 +12,9 @@ function NotFound404() {
         Te invitamos a regresar a buscar anuncios geniales!
       </p>
       <p>
+        <Link to="/">        
         <Button variant="primary">Regresar</Button>
+        </Link>
       </p>
     </Jumbotron>
   )

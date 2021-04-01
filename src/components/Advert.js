@@ -1,4 +1,4 @@
-import { FaTimes, FaRegHandPointer } from 'react-icons/fa';
+import { FaTimes, FaRegHandPointer } from 'react-icons/fa'
 
 const Advert = ({ advert, onDelete, onDetail }) => {
   return (
