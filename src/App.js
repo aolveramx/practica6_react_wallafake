@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Main from './components/pages/Main'
@@ -14,11 +15,11 @@ const App = () => {
       <Router>
         <Fragment>
             <Header />
-              <div className='container'>
+              <Container>
                 <Switch>
                   <Route path='/' exact component={Main}/>
                 </Switch>
-              </div>
+              </Container>
             <Footer />
         </Fragment>
       </Router>

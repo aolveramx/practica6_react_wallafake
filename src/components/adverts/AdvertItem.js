@@ -7,6 +7,7 @@ const AdvertItem = ({ advert }) => {
   const { id, name, sale, price, tags } = advert
 
   return (
+
     <Card style={{ width: '18rem' }}>
       <Card.Img variant='top' src={defaultIMG} />
       <Card.Body>

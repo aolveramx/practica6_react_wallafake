@@ -50,6 +50,14 @@ const AdvertState = (props) => {
   const [state, dispatch] = useReducer(advertReducer, initialState)
 
   //Add Advert
+  const id = Math.floor(Math.random() * 1000) + 1
+
+  const addAdvert = (advert) => {
+    dispatch({
+      type: ADD_ADVERT,
+      payload: advert
+    })
+  }
 
   //Delete Advert
 
@@ -61,6 +69,7 @@ const AdvertState = (props) => {
     <AdvertContext.Provider
       value={{
         adverts: state.adverts,
+        addAdvert
       }}
     >
       {props.children}

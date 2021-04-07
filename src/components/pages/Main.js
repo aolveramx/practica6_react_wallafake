@@ -1,18 +1,20 @@
 import Adverts from '../adverts/Adverts'
+import AdvertForm from '../adverts/AdvertForm'
+import { Container, Col, Row } from 'react-bootstrap'
 
 const Main = () => {
   return (
-    <div>
-      <h1>Main</h1>
-      <div>
-        {/*AdvertForm*/}
-      </div>
-      <div>
-        <Adverts />
-      </div>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <Adverts />
+        </Col>
+        <Col>
+          <AdvertForm />
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
 export default Main
-
