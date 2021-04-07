@@ -2,21 +2,19 @@ import { Link } from 'react-router-dom'
 import { Button, Form, FormControl, Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { FaDoorClosed, FaSearch } from 'react-icons/fa';
+import PropTypes from 'prop-types'
 
-function Header() {
+const Header = ({ title }) => {
   return (
-    <>
     <Navbar bg="primary" variant="dark" className="mb-3">
-      <Navbar.Brand>WallaFake</Navbar.Brand>
-      <Nav className="mr-auto">
-        <Nav.Link>
-          <Link to="/">Anuncios</Link>
-        </Nav.Link>
-        <Nav.Link>
-          <Link to="/advert/new">Nuevo +</Link>
-        </Nav.Link>
-        {/* <Nav.Link href="/advert/new">Nuevo +</Nav.Link> */}
+
+      <Navbar.Brand>{title}</Navbar.Brand>
+
+      <Nav className="mr-auto text-white">
+        <Nav.Link href="/">Anuncios</Nav.Link>
+        <Nav.Link href="/advert/new">Nuevo +</Nav.Link>
       </Nav>
+
       <Form inline>
         <Button variant="outline-light" className="mr-2">
           <FaSearch />
@@ -26,9 +24,17 @@ function Header() {
           <FaDoorClosed style={{ color: 'white', cursor: 'pointer'}} />
         </Button>
       </Form>
+
     </Navbar>
-  </>
   )
+}
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired
+}
+
+Header.defaultProps = {
+  title: 'WALLAFAKE'
 }
 
 export default Header;
