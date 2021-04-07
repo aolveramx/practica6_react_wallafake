@@ -5,13 +5,23 @@ import AdvertContext from '../../context/advert/advertContext'
 const Adverts = () => {
   const advertContext = useContext(AdvertContext)
 
-  const { adverts } = advertContext
+  const { adverts, filtered } = advertContext
+
+  if (adverts.lenght === 0) {
+    return (
+      <h4>No hay anuncios publicados, vuelve mas tarde o publica uno 🙄</h4>
+    )
+  }
 
   return (
     <Fragment>
-      {adverts.map(advert => (
-        <AdvertItem key={advert.id} advert={advert} />
-      ))}
+      {filtered !== null
+        ? filtered.map((advert) => (
+            <AdvertItem key={advert.id} advert={advert} />
+          ))
+        : adverts.map((advert) => (
+            <AdvertItem key={advert.id} advert={advert} />
+          ))}
     </Fragment>
   )
 }

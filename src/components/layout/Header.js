@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Button, Form, FormControl, Navbar, Nav } from 'react-bootstrap'
+import { Button, Form, Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { FaDoorClosed, FaSearch } from 'react-icons/fa';
+import { FaDoorClosed } from 'react-icons/fa';
 import PropTypes from 'prop-types'
 
 const Header = ({ title }) => {
@@ -16,10 +16,6 @@ const Header = ({ title }) => {
       </Nav>
 
       <Form inline>
-        <Button variant="outline-light" className="mr-2">
-          <FaSearch />
-        </Button>
-        <FormControl type="text" placeholder="Buscar" className="mr-sm-2" />
         <Button variant="danger" className="mr-2">
           <FaDoorClosed style={{ color: 'white', cursor: 'pointer'}} />
         </Button>

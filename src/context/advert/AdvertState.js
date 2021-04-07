@@ -4,7 +4,8 @@ import advertReducer from './advertReducer'
 import {
   ADD_ADVERT,
   DELETE_ADVERT,
-  FILTER_ADVERT,
+  FILTER_ADVERTS,
+  CLEAR_FILTER,
   SET_ALERT,
   REMOVE_ALERT,
 } from '../types'
@@ -18,7 +19,6 @@ const AdvertState = (props) => {
         sale: true,
         price: 900,
         tags: 'lifestyle',
-
       },
       {
         id: 2,
@@ -26,7 +26,6 @@ const AdvertState = (props) => {
         sale: false,
         price: 1319,
         tags: 'work',
-
       },
       {
         id: 3,
@@ -34,7 +33,6 @@ const AdvertState = (props) => {
         sale: true,
         price: 999,
         tags: 'mobile',
-
       },
       {
         id: 4,
@@ -42,9 +40,9 @@ const AdvertState = (props) => {
         sale: false,
         price: 105000,
         tags: 'motor',
-
       },
     ],
+    filtered: null,
   }
 
   const [state, dispatch] = useReducer(advertReducer, initialState)
@@ -55,7 +53,7 @@ const AdvertState = (props) => {
   const addAdvert = (advert) => {
     dispatch({
       type: ADD_ADVERT,
-      payload: advert
+      payload: advert,
     })
   }
 
@@ -63,20 +61,34 @@ const AdvertState = (props) => {
   const deleteAdvert = (id) => {
     dispatch({
       type: DELETE_ADVERT,
-      payload: id
+      payload: id,
     })
   }
 
   //Filter Adverts
+  const filterAdverts = (text) => {
+    dispatch({
+      type: FILTER_ADVERTS,
+      payload: text,
+    })
+  }
 
   //Clear Filter
+  const clearFilter = () => {
+    dispatch({
+      type: CLEAR_FILTER,
+    })
+  }
 
   return (
     <AdvertContext.Provider
       value={{
         adverts: state.adverts,
+        filtered: state.filtered,
         addAdvert,
-        deleteAdvert
+        deleteAdvert,
+        filterAdverts,
+        clearFilter,
       }}
     >
       {props.children}

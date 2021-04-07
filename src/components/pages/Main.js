@@ -1,5 +1,6 @@
 import Adverts from '../adverts/Adverts'
 import AdvertForm from '../adverts/AdvertForm'
+import AdvertFilter from '../adverts/AdvertFilter'
 import { Container, Col, Row } from 'react-bootstrap'
 
 const Main = () => {
@@ -7,10 +8,11 @@ const Main = () => {
     <Container>
       <Row>
         <Col>
-          <Adverts />
+          <AdvertForm />
         </Col>
         <Col>
-          <AdvertForm />
+          <AdvertFilter />
+          <Adverts />
         </Col>
       </Row>
     </Container>

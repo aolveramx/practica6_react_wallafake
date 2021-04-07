@@ -1,7 +1,8 @@
 import {
   ADD_ADVERT,
   DELETE_ADVERT,
-  FILTER_ADVERT,
+  FILTER_ADVERTS,
+  CLEAR_FILTER,
   SET_ALERT,
   REMOVE_ALERT,
 } from '../types'
@@ -18,6 +19,19 @@ export default (state, action) => {
       return {
         ...state,
         adverts: state.adverts.filter((advert) => advert.id !== action.payload),
+      }
+    case FILTER_ADVERTS:
+      return {
+        ...state,
+        filtered: state.adverts.filter((advert) => {
+          const regex = new RegExp(`${action.payload}`, 'gi')
+          return advert.name.match(regex) || advert.tags.match(regex)
+        }),
+      }
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
       }
     default:
       return state
