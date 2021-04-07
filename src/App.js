@@ -6,24 +6,27 @@ import Footer from './components/layout/Footer'
 import Main from './components/pages/Main'
 
 import AdvertState from './context/advert/AdvertState'
+import AuthState from './context/auth/AuthState'
 import './App.css'
 
 const App = () => {
 
   return (
-    <AdvertState>
-      <Router>
-        <Fragment>
-            <Header />
-              <Container>
-                <Switch>
-                  <Route path='/' exact component={Main}/>
-                </Switch>
-              </Container>
-            <Footer />
-        </Fragment>
-      </Router>
-    </AdvertState>
+    <AuthState>
+      <AdvertState>
+        <Router>
+          <Fragment>
+              <Header />
+                <Container>
+                  <Switch>
+                    <Route path='/' exact component={Main}/>
+                  </Switch>
+                </Container>
+              <Footer />
+          </Fragment>
+        </Router>
+      </AdvertState>
+    </AuthState>
   )
 }
 
