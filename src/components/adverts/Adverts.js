@@ -1,4 +1,5 @@
 import { Fragment, useContext } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import AdvertItem from './AdvertItem'
 import AdvertContext from '../../context/advert/advertContext'
 
@@ -15,13 +16,19 @@ const Adverts = () => {
 
   return (
     <Fragment>
-      {filtered !== null
-        ? filtered.map((advert) => (
-            <AdvertItem key={advert.id} advert={advert} />
-          ))
-        : adverts.map((advert) => (
-            <AdvertItem key={advert.id} advert={advert} />
-          ))}
+      <TransitionGroup>
+        {filtered !== null
+          ? filtered.map((advert) => (
+            <CSSTransition key={advert.id} timeout={500} classNames='item'>
+              <AdvertItem advert={advert} />
+            </CSSTransition>
+            ))
+          : adverts.map((advert) => (
+            <CSSTransition key={advert.id} timeout={500} classNames='item'>
+              <AdvertItem advert={advert} />
+            </CSSTransition>
+            ))}
+      </TransitionGroup>
     </Fragment>
   )
 }
