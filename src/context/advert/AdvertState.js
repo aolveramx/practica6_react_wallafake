@@ -1,4 +1,4 @@
-import { useReducer } from 'core-js/library/fn/reflect/es7/metadata'
+import { useReducer } from 'react'
 import AdvertContext from './advertContext'
 import advertReducer from './advertReducer'
 import {
