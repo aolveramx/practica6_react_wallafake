@@ -13,36 +13,36 @@ const AdvertState = (props) => {
   const initialState = {
     adverts: [
       {
+        id: 1,
         name: 'Sony PlayStation 5',
         sale: true,
         price: 900,
         tags: 'lifestyle',
-        userId: 1,
-        id: 1,
+
       },
       {
+        id: 2,
         name: 'Apple iPhone 12 Pro Max',
         sale: false,
         price: 1319,
         tags: 'work',
-        userId: 1,
-        id: 2,
+
       },
       {
+        id: 3,
         name: 'Google Pixel 4a',
         sale: true,
         price: 999,
         tags: 'mobile',
-        userId: 1,
-        id: 3,
+
       },
       {
+        id: 4,
         name: 'Ford Mustang 1966 Convertible',
         sale: false,
         price: 105000,
         tags: 'motor',
-        userId: 1,
-        id: 4,
+
       },
     ],
   }
@@ -60,6 +60,12 @@ const AdvertState = (props) => {
   }
 
   //Delete Advert
+  const deleteAdvert = (id) => {
+    dispatch({
+      type: DELETE_ADVERT,
+      payload: id
+    })
+  }
 
   //Filter Adverts
 
@@ -69,7 +75,8 @@ const AdvertState = (props) => {
     <AdvertContext.Provider
       value={{
         adverts: state.adverts,
-        addAdvert
+        addAdvert,
+        deleteAdvert
       }}
     >
       {props.children}

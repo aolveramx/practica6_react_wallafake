@@ -1,10 +1,19 @@
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Badge, Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap'
+import AdvertContext from '../../context/advert/advertContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import defaultIMG from '../../img/DefaultIMGAdvert.png'
 
 const AdvertItem = ({ advert }) => {
+  const advertContext = useContext(AdvertContext)
+  const { deleteAdvert } = advertContext
+
   const { id, name, sale, price, tags } = advert
+
+  const onDelete = () => {
+    deleteAdvert(id)
+  }
 
   return (
 
@@ -24,7 +33,7 @@ const AdvertItem = ({ advert }) => {
         </ListGroupItem>
       </ListGroup>
       <Card.Body>
-        <Button variant='danger'>Eliminar</Button>
+        <Button variant='danger' onClick={onDelete}>Eliminar</Button>
       </Card.Body>
     </Card>
   )

@@ -7,15 +7,19 @@ import {
 } from '../types'
 
 //eslint-disable-next-line
-export default (action, state) => {
-  switch(action.type) {
+export default (state, action) => {
+  switch (action.type) {
     case ADD_ADVERT:
       return {
         ...state,
-        adverts: [...state.adverts, action.payload]
+        adverts: [...state.adverts, action.payload],
+      }
+    case DELETE_ADVERT:
+      return {
+        ...state,
+        adverts: state.adverts.filter((advert) => advert.id !== action.payload),
       }
     default:
       return state
   }
 }
-
