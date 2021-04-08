@@ -1,6 +1,7 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext'
+import AuthContext from '../../context/auth/authContext'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,16 +9,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Register = () => {
   const alertContext = useContext(AlertContext)
 
+  const authContext = useContext(AuthContext)
+
   const { setAlert } = alertContext
 
+  const { register, error, clearErrors } = authContext
+
+  useEffect(() => {
+    if(error === 'El usuario ya existe') {
+      setAlert(error, 'danger')
+      clearErrors()
+    }
+    //eslint-disable-next-line
+  }, [error])
+
   const [user, setUser] = useState({
-    name: '',
     email: '',
     password: '',
-    password2: ''
+    username: '',
+    name: ''
   })
 
-  const { name, email, password, password2 } = user
+  const { email, password, username, name  } = user
 
   const onChange = (e) => {
     setUser({
@@ -28,31 +41,21 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (name === '' || email === '' || password === '') {
+    if (name === '' || email === '' || password === '' || username === '') {
       setAlert('Ingresa todos los campos', 'danger')
-    } else if (password !== password2) {
-      setAlert('Las contraseñas no coinciden', 'danger')
     } else {
-      console.log('Register Submit');
+      register({
+        email,
+        password,
+        username,
+        name,
+      })
     }
   }
 
   return (
     <Container>
     <Form onSubmit={onSubmit}>
-
-      <Form.Group controlId="formName">
-        <Form.Label>Nombre de Usuario</Form.Label>
-        <Form.Control 
-        type="text"
-        name="name"
-        placeholder="Camilo"
-        value={name}
-        onChange={onChange}
-        />
-      </Form.Group>
-
-
       <Form.Group controlId="formText">
         <Form.Label>Correo Electrónico</Form.Label>
         <Form.Control 
@@ -78,14 +81,26 @@ const Register = () => {
         </Form.Control>
       </Form.Group>
 
-      <Form.Group controlId="formPasswordConfirm">
-        <Form.Label>Confirma tu contraseña</Form.Label>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Nombre de Usuario</Form.Label>
         <Form.Control 
-        type="password"
-        placeholder="1234"
-        value={password2}
-        onChange={onChange}>
-        </Form.Control>
+        type="text"
+        name="username"
+        placeholder="camilomax"
+        value={username}
+        onChange={onChange}
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formName">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control 
+        type="text"
+        name="name"
+        placeholder="Camilo Sánchez"
+        value={name}
+        onChange={onChange}
+        />
       </Form.Group>
 
       <Button 
