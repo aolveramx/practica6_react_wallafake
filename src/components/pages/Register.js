@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alert/alertContext'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const Register = () => {
+  const alertContext = useContext(AlertContext)
+
+  const { setAlert } = alertContext
+
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -23,7 +28,13 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('Register Submit');
+    if (name === '' || email === '' || password === '') {
+      setAlert('Ingresa todos los campos', 'danger')
+    } else if (password !== password2) {
+      setAlert('Las contraseñas no coinciden', 'danger')
+    } else {
+      console.log('Register Submit');
+    }
   }
 
   return (

@@ -6,29 +6,33 @@ import Footer from './components/layout/Footer'
 import Main from './components/pages/Main'
 import Register from './components/pages/Register'
 import Login from './components/pages/Login'
+import Alerts from './components/layout/Alerts'
 
 import AdvertState from './context/advert/AdvertState'
 import AuthState from './context/auth/AuthState'
+import AlertState from './context/alert/AlertState'
 import './App.css'
 
 const App = () => {
-
   return (
     <AuthState>
       <AdvertState>
-        <Router>
-          <Fragment>
+        <AlertState>
+          <Router>
+            <Fragment>
               <Header />
-                <Container>
-                  <Switch>
-                    <Route exact path='/' component={Main}/>
-                    <Route exact path='/register' component={Register}/>
-                    <Route exact path='/login' component={Login}/>
-                  </Switch>
-                </Container>
+              <Container>
+                <Alerts />
+                <Switch>
+                  <Route exact path='/' component={Main} />
+                  <Route exact path='/register' component={Register} />
+                  <Route exact path='/login' component={Login} />
+                </Switch>
+              </Container>
               <Footer />
-          </Fragment>
-        </Router>
+            </Fragment>
+          </Router>
+        </AlertState>
       </AdvertState>
     </AuthState>
   )
