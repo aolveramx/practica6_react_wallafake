@@ -9,12 +9,16 @@ import PropTypes from 'prop-types'
 const Header = ({ title }) => {
   const authContext = useContext(AuthContext)
 
-  const { loadUser } = authContext
+  const { logout, loadUser } = authContext
 
   useEffect(() => {
     loadUser()
     //eslint-disable-next-line
   }, [])
+
+  const onLogout = () => {
+    logout()
+  }
 
   return (
     <Navbar bg="primary" variant="dark" className="mb-3">
@@ -46,7 +50,7 @@ const Header = ({ title }) => {
         </Link>
 
 
-        <Button variant="danger" className="mr-2">
+        <Button variant="danger" className="mr-2" onClick={onLogout}>
           <FaDoorClosed style={{ color: 'white', cursor: 'pointer'}} />
           {' '}Salir
         </Button>
