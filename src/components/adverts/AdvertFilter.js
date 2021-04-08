@@ -6,14 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const AdvertFilter = () => {
   const advertContext = useContext(AdvertContext)
   const text = useRef('')
+  
+  const { filterAdverts, clearFilter, filtered } = advertContext
 
   useEffect(() => {
     if (filtered === null) {
       text.current.value = ''
     }
   })
-
-  const { filterAdverts, clearFilter, filtered } = advertContext
 
   const onChange = (e) => {
     if (text.current.value !== '') {

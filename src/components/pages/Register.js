@@ -8,11 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Register = () => {
   const alertContext = useContext(AlertContext)
-
   const authContext = useContext(AuthContext)
 
   const { setAlert } = alertContext
-
   const { register, error, clearErrors } = authContext
 
   useEffect(() => {
@@ -56,9 +54,9 @@ const Register = () => {
   return (
     <Container>
     <Form onSubmit={onSubmit}>
-      <Form.Group controlId="formText">
+      <Form.Group controlId="email">
         <Form.Label>Correo Electrónico</Form.Label>
-        <Form.Control 
+        <Form.Control
         type="email"
         name="email"
         placeholder="me@me.com"
@@ -70,9 +68,9 @@ const Register = () => {
         </Form.Text>
       </Form.Group>
 
-      <Form.Group controlId="formPassword">
+      <Form.Group controlId="password">
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control 
+        <Form.Control
         type="password"
         name="password"
         placeholder="1234"
@@ -81,9 +79,9 @@ const Register = () => {
         </Form.Control>
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="username">
         <Form.Label>Nombre de Usuario</Form.Label>
-        <Form.Control 
+        <Form.Control
         type="text"
         name="username"
         placeholder="camilomax"
@@ -92,9 +90,9 @@ const Register = () => {
         />
       </Form.Group>
 
-      <Form.Group controlId="formName">
+      <Form.Group controlId="name">
         <Form.Label>Nombre</Form.Label>
-        <Form.Control 
+        <Form.Control
         type="text"
         name="name"
         placeholder="Camilo Sánchez"

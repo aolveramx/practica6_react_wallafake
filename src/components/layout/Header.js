@@ -1,10 +1,21 @@
+import { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import AuthContext from '../../context/auth/authContext'
 import { Button, Form, Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { FaDoorClosed, FaHome, FaFileSignature, FaSignInAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types'
 
 const Header = ({ title }) => {
+  const authContext = useContext(AuthContext)
+
+  const { loadUser } = authContext
+
+  useEffect(() => {
+    loadUser()
+    //eslint-disable-next-line
+  }, [])
+
   return (
     <Navbar bg="primary" variant="dark" className="mb-3">
       <Navbar.Brand>{title}</Navbar.Brand>

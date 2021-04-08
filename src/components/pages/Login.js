@@ -1,9 +1,29 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import AlertContext from '../../context/alert/alertContext'
+import AuthContext from '../../context/auth/authContext'
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Container, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const Login = () => {
+const Login = (props) => {
+  const alertContext = useContext(AlertContext)
+  const authContext = useContext(AuthContext)
+
+  const { setAlert } = alertContext
+  const { login, error, clearErrors, isAuthenticated } = authContext
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/')
+    }
+
+    if(error === 'Invalid Credentials') {
+      setAlert(error, 'danger')
+      clearErrors()
+    }
+    //eslint-disable-next-line
+  }, [error, isAuthenticated, props.history])
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -21,17 +41,25 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('Login Submit');
+    if (email === '' || password === '') {
+      setAlert('Ingresa todos los campos correctamente', 'danger')
+    } else {
+      login({
+        email,
+        password
+      })
+    }
   }
 
   return (
     <Container>
     <Form onSubmit={onSubmit}>
 
-      <Form.Group controlId="formText">
+      <Form.Group controlId="email">
         <Form.Label>Nombre de Usuario</Form.Label>
-        <Form.Control 
+        <Form.Control
         type="email"
+        name="email"
         placeholder="Ingresa tu correo, ejemplo: me@me.com"
         value={email}
         onChange={onChange}
@@ -41,9 +69,9 @@ const Login = () => {
         </Form.Text>
       </Form.Group>
 
-      <Form.Group controlId="formPassword">
+      <Form.Group controlId="password">
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control 
+        <Form.Control
         type="password"
         name="password"
         placeholder="Ingresa una contraseña valida, por ejemplo 1234"
