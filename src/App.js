@@ -4,6 +4,8 @@ import { Container } from 'react-bootstrap'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Main from './components/pages/Main'
+import Register from './components/pages/Register'
+import Login from './components/pages/Login'
 
 import AdvertState from './context/advert/AdvertState'
 import AuthState from './context/auth/AuthState'
@@ -19,7 +21,9 @@ const App = () => {
               <Header />
                 <Container>
                   <Switch>
-                    <Route path='/' exact component={Main}/>
+                    <Route exact path='/' component={Main}/>
+                    <Route exact path='/register' component={Register}/>
+                    <Route exact path='/login' component={Login}/>
                   </Switch>
                 </Container>
               <Footer />
