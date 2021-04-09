@@ -1,5 +1,6 @@
 import {
   ADD_ADVERT,
+  ADVERT_ERROR,
   DELETE_ADVERT,
   FILTER_ADVERTS,
   CLEAR_FILTER,
@@ -32,6 +33,11 @@ export default (state, action) => {
       return {
         ...state,
         filtered: null,
+      }
+    case ADVERT_ERROR:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state

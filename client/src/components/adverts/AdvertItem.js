@@ -9,7 +9,7 @@ const AdvertItem = ({ advert }) => {
   const advertContext = useContext(AdvertContext)
   const { deleteAdvert } = advertContext
 
-  const { id, name, sale, price, tags } = advert
+  const { id, name, type, price, tags } = advert
 
   const onDelete = () => {
     deleteAdvert(id)
@@ -25,7 +25,7 @@ const AdvertItem = ({ advert }) => {
       </Card.Body>
       <ListGroup className='list-group-flush'>
         <ListGroupItem>
-          {sale === true ? 'Venta' : 'Compra'}
+          {type ? 'Venta' : 'Compra'}
         </ListGroupItem>
         <ListGroupItem>{price}</ListGroupItem>
         <ListGroupItem>

@@ -8,12 +8,12 @@ const AdvertForm = () => {
 
   const [advert, setAdvert] = useState({
     name: '',
-    sale: true,
+    type: true,
     price: '',
     tags: ''
   })
 
-  const { name, sale, price, tags } = advert
+  const { name, type, price, tags } = advert
 
   const onChange = (e) =>
     setAdvert({ ...advert, [e.target.name]: e.target.value })
@@ -23,7 +23,7 @@ const AdvertForm = () => {
     advertContext.addAdvert(advert)
     setAdvert({
       name: '',
-      sale: true,
+      type: true,
       price: '',
       tags: '',
     })
@@ -39,18 +39,21 @@ const AdvertForm = () => {
           name='name'
           value={name}
           onChange={onChange}
+          required
         />
       </Form.Group>
 
     
 
       <Form.Group>
+      <Form.Label>Precio</Form.Label>
         <Form.Control
           type='text'
           placeholder='$900'
           name='price'
           value={price}
           onChange={onChange}
+          required
         />
       </Form.Group>
 
@@ -58,59 +61,37 @@ const AdvertForm = () => {
         <Form.Check
           inline
           type='radio'
-          name='sale'
-          value={sale}
-          label='Venta'
+          name='type'
+          value={type}
+          checked={type ? 'venta' : 'compra'}
+          label='venta'
           onChange={onChange}
         />
 
         <Form.Check
           inline
           type='radio'
-          value={sale}
-          name='sale'
-          label='Compra'
+          name='type'
+          value={type}
+          label='compra'
           onChange={onChange}
         />
       </Form.Group>
 
+      <Form.Group>
       <Form.Label>Categoria</Form.Label>
-      <Form.Group>
-        <Form.Check
-          inline
-          type='radio'
+        <Form.Control
+          type='text'
+          placeholder='lifeStyle, work, mobile, motor'
           name='tags'
           value={tags}
-          label='lifeStyle'
           onChange={onChange}
+          required
         />
-        <Form.Check
-          inline
-          type='radio'
-          name='tags'
-          value={tags}
-          label='work'
-          onChange={onChange}
-        />
-        <Form.Check
-          inline
-          type='radio'
-          name='tags'
-          value={tags}
-          label='mobile'
-          onChange={onChange}
-        />
-        <Form.Check
-          inline
-          type='radio'
-          name='tags'
-          value={tags}
-          label='motor'
-          onChange={onChange}
-        />
-
       </Form.Group>
-      <Form.Group>
+
+
+      {/* <Form.Group>
         <Form.Label>Sube una foto</Form.Label>
         <Form.File
           id='custom-file'
@@ -118,7 +99,7 @@ const AdvertForm = () => {
           data-browse='Subir'
           custom
         />
-      </Form.Group>
+      </Form.Group> */}
 
       <Button variant='primary btn-block' type='submit'>
         Publicar

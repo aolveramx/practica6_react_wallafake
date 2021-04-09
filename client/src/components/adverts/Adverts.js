@@ -19,12 +19,12 @@ const Adverts = () => {
       <TransitionGroup>
         {filtered !== null
           ? filtered.map((advert) => (
-            <CSSTransition key={advert.id} timeout={500} classNames='item'>
+            <CSSTransition key={advert._id} timeout={500} classNames='item'>
               <AdvertItem advert={advert} />
             </CSSTransition>
             ))
           : adverts.map((advert) => (
-            <CSSTransition key={advert.id} timeout={500} classNames='item'>
+            <CSSTransition key={advert._id} timeout={500} classNames='item'>
               <AdvertItem advert={advert} />
             </CSSTransition>
             ))}

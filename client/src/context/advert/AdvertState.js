@@ -1,8 +1,10 @@
 import { useReducer } from 'react'
+import axios from 'axios'
 import AdvertContext from './advertContext'
 import advertReducer from './advertReducer'
 import {
   ADD_ADVERT,
+  ADVERT_ERROR,
   DELETE_ADVERT,
   FILTER_ADVERTS,
   CLEAR_FILTER,
@@ -12,49 +14,36 @@ import {
 
 const AdvertState = (props) => {
   const initialState = {
-    adverts: [
-      {
-        id: 1,
-        name: 'Sony PlayStation 5',
-        sale: true,
-        price: 900,
-        tags: 'lifestyle',
-      },
-      {
-        id: 2,
-        name: 'Apple iPhone 12 Pro Max',
-        sale: false,
-        price: 1319,
-        tags: 'work',
-      },
-      {
-        id: 3,
-        name: 'Google Pixel 4a',
-        sale: true,
-        price: 999,
-        tags: 'mobile',
-      },
-      {
-        id: 4,
-        name: 'Ford Mustang 1966 Convertible',
-        sale: false,
-        price: 105000,
-        tags: 'motor',
-      },
-    ],
+    adverts: [],
     filtered: null,
+    error: null,
   }
 
   const [state, dispatch] = useReducer(advertReducer, initialState)
 
   //Add Advert
-  const id = Math.floor(Math.random() * 1000) + 1
+  const addAdvert = async (advert) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
 
-  const addAdvert = (advert) => {
-    dispatch({
-      type: ADD_ADVERT,
-      payload: advert,
-    })
+    try {
+      const response = await axios.post('/api/adverts', advert, config)
+
+      dispatch({
+        type: ADD_ADVERT,
+        payload: response.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: ADVERT_ERROR,
+        payload: error.response.message,
+      })
+    }
+
+
   }
 
   //Delete Advert
@@ -85,6 +74,7 @@ const AdvertState = (props) => {
       value={{
         adverts: state.adverts,
         filtered: state.filtered,
+        error: state.error,
         addAdvert,
         deleteAdvert,
         filterAdverts,

@@ -1,5 +1,6 @@
 //UI Types
 export const ADD_ADVERT = 'ADD_ADVERT'
+export const ADVERT_ERROR = 'ADVERT_ERROR'
 export const DELETE_ADVERT= 'DELETE_ADVERT'
 export const FILTER_ADVERTS = 'FILTER_ADVERTS'
 export const CLEAR_FILTER = 'CLEAR_FILTER'
