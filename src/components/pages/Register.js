@@ -14,7 +14,7 @@ const Register = () => {
   const { register, error, clearErrors } = authContext
 
   useEffect(() => {
-    if(error === 'El usuario ya existe') {
+    if(error === 'Internal server error') {
       setAlert(error, 'danger')
       clearErrors()
     }

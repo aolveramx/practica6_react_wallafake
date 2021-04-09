@@ -1,24 +1,11 @@
-import { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../context/auth/authContext'
 import { Button, Form, Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { FaDoorClosed, FaHome, FaFileSignature, FaSignInAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types'
 
 const Header = ({ title }) => {
-  const authContext = useContext(AuthContext)
 
-  const { logout, loadUser } = authContext
-
-  useEffect(() => {
-    loadUser()
-    //eslint-disable-next-line
-  }, [])
-
-  const onLogout = () => {
-    logout()
-  }
 
   return (
     <Navbar bg="primary" variant="dark" className="mb-3">
@@ -50,7 +37,7 @@ const Header = ({ title }) => {
         </Link>
 
 
-        <Button variant="danger" className="mr-2" onClick={onLogout}>
+        <Button variant="danger" className="mr-2">
           <FaDoorClosed style={{ color: 'white', cursor: 'pointer'}} />
           {' '}Salir
         </Button>
