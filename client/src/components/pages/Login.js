@@ -1,28 +1,9 @@
-import { useState, useContext, useEffect } from 'react'
-import AlertContext from '../../context/alert/alertContext'
-import AuthContext from '../../context/auth/authContext'
+import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Container, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const Login = (props) => {
-  const alertContext = useContext(AlertContext)
-  const authContext = useContext(AuthContext)
-
-  const { setAlert } = alertContext
-  const { login, error, clearErrors, isAuthenticated } = authContext
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      props.history.push('/')
-    }
-
-    if(error === 'Invalid Credentials') {
-      setAlert(error, 'danger')
-      clearErrors()
-    }
-    //eslint-disable-next-line
-  }, [error, isAuthenticated, props.history])
+const Login = () => {
 
   const [user, setUser] = useState({
     email: '',
@@ -41,14 +22,7 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (email === '' || password === '') {
-      setAlert('Ingresa todos los campos correctamente', 'danger')
-    } else {
-      login({
-        email,
-        password
-      })
-    }
+    console.log('Login Submit');
   }
 
   return (

@@ -14,7 +14,7 @@ const Register = () => {
   const { register, error, clearErrors } = authContext
 
   useEffect(() => {
-    if(error === 'Internal server error') {
+    if(error === 'El Usuario ya existe') {
       setAlert(error, 'danger')
       clearErrors()
     }
@@ -22,88 +22,94 @@ const Register = () => {
   }, [error])
 
   const [user, setUser] = useState({
+    name: '',
     email: '',
     password: '',
-    username: '',
-    name: ''
+    password2: ''
   })
 
-  const { email, password, username, name  } = user
+  const { name, email, password, password2 } = user
 
   const onChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: [e.target.value]
+      [e.target.name]: e.target.value
     })
   }
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (name === '' || email === '' || password === '' || username === '') {
-      setAlert('Ingresa todos los campos', 'danger')
-    } else {
-      register({
-        email,
-        password,
-        username,
-        name,
-      })
-    }
+    register({
+      name,
+      email,
+      password
+    })
   }
 
   return (
     <Container>
     <Form onSubmit={onSubmit}>
-      <Form.Group controlId="email">
-        <Form.Label>Correo Electrónico</Form.Label>
+
+    <Form.Group>
+        <Form.Label htmlFor='name'>Nombre</Form.Label>
+        <Form.Control
+        type="text"
+        name="name"
+        placeholder="Camilo"
+        value={name}
+        onChange={onChange}
+        required
+        >
+        </Form.Control>
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label htmlFor='email'>Correo Electrónico</Form.Label>
         <Form.Control
         type="email"
         name="email"
         placeholder="me@me.com"
         value={email}
         onChange={onChange}
+        required
         />
         <Form.Text className="text-muted">
           Tu información está prótegida con nosotros
         </Form.Text>
       </Form.Group>
 
-      <Form.Group controlId="password">
-        <Form.Label>Contraseña</Form.Label>
+      <Form.Group>
+        <Form.Label htmlFor='password'>Contraseña</Form.Label>
         <Form.Control
         type="password"
         name="password"
-        placeholder="1234"
+        placeholder="123456"
         value={password}
-        onChange={onChange}>
+        onChange={onChange}
+        required
+        minLength='6'
+        >
         </Form.Control>
       </Form.Group>
 
-      <Form.Group controlId="username">
-        <Form.Label>Nombre de Usuario</Form.Label>
+      <Form.Group>
+        <Form.Label htmlFor='password2'>Confirma tu contraseña</Form.Label>
         <Form.Control
-        type="text"
-        name="username"
-        placeholder="camilomax"
-        value={username}
+        type="password"
+        name="password2"
+        placeholder="123456"
+        value={password2}
         onChange={onChange}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="name">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control
-        type="text"
-        name="name"
-        placeholder="Camilo Sánchez"
-        value={name}
-        onChange={onChange}
+        required
+        minLength='6'
         />
       </Form.Group>
 
       <Button 
       variant="primary btn-block" 
-      type="submit">
+      type="submit"
+      value='Register'
+      >
       Registro
       </Button>
 

@@ -13,25 +13,6 @@ const AdvertForm = () => {
     tags: ''
   })
 
-  // const options = [
-  //   {
-  //     label: 'LifeStyle',
-  //     value: 'lifestyle'
-  //   },
-  //   {
-  //     label: 'Work',
-  //     value: 'work'
-  //   },
-  //   {
-  //     label: 'Mobile',
-  //     value: 'mobile'
-  //   },
-  //   {
-  //     label: 'Motor',
-  //     value: 'motor'
-  //   }
-  // ]
-
   const { name, sale, price, tags } = advert
 
   const onChange = (e) =>
@@ -129,23 +110,6 @@ const AdvertForm = () => {
         />
 
       </Form.Group>
-
-      {/* <Form.Group>
-        <Form.Label>Categoria</Form.Label>
-        <Form.Control
-          as='select'
-          defaultValue='lifestyle'
-          value={tags.option}
-          onChange={(e) => {
-            setAdvert(e.target.value)
-          }}
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>{option.label}</option>
-          ))}
-        </Form.Control>
-      </Form.Group> */}
-
       <Form.Group>
         <Form.Label>Sube una foto</Form.Label>
         <Form.File
