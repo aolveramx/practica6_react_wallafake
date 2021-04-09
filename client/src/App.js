@@ -7,6 +7,7 @@ import Main from './components/pages/Main'
 import Register from './components/pages/Register'
 import Login from './components/pages/Login'
 import Alerts from './components/layout/Alerts'
+import PrivateRoute from './components/routing/PrivateRoute'
 
 import AdvertState from './context/advert/AdvertState'
 import AuthState from './context/auth/AuthState'
@@ -29,7 +30,7 @@ const App = () => {
               <Container>
                 <Alerts />
                 <Switch>
-                  <Route exact path='/' component={Main} />
+                  <PrivateRoute exact path='/' component={Main} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                 </Switch>
