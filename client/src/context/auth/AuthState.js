@@ -2,6 +2,7 @@ import { useReducer } from 'react'
 import axios from 'axios'
 import AuthContext from './authContext'
 import authReducer from './authReducer'
+import setAuthToken from '../../utils/setAuthToken'
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -10,7 +11,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
 } from '../types'
 
 const AuthState = (props) => {
@@ -19,20 +20,36 @@ const AuthState = (props) => {
     isAuthenticated: null,
     loading: true,
     user: null,
-    error: null
+    error: null,
   }
 
   const [state, dispatch] = useReducer(authReducer, initialState)
 
   //Load User
-  const loadUser = () => console.log('Load User');
+  const loadUser = async () => {
+    if(localStorage.token) {
+      setAuthToken(localStorage.token)
+    }
+
+    try {
+      const response = await axios.get('/api/auth')
+      dispatch({
+        type: USER_LOADED,
+        payload: response.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: AUTH_ERROR,
+      })
+    }
+  }
 
   //Register User
-  const register = async formData => {
+  const register = async (formData) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }
 
     try {
@@ -40,21 +57,43 @@ const AuthState = (props) => {
 
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: response.data
+        payload: response.data,
       })
+      loadUser()
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response.data.message
+        payload: error.response.data.message,
       })
     }
   }
 
   //Login User
-  const login = () => console.log('Login');
+  const login = async (formData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    try {
+      const response = await axios.post('/api/auth', formData, config)
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: response.data,
+      })
+      loadUser()
+    } catch (error) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: error.response.data.message,
+      })
+    }
+  }
 
   //Logout User
-  const logout = () => console.log('Login');
+  const logout = () => console.log('Login')
 
   //Clear errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS })
@@ -71,7 +110,7 @@ const AuthState = (props) => {
         loadUser,
         login,
         logout,
-        clearErrors
+        clearErrors,
       }}
     >
       {props.children}

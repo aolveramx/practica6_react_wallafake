@@ -6,20 +6,24 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const Register = () => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext)
   const authContext = useContext(AuthContext)
 
   const { setAlert } = alertContext
-  const { register, error, clearErrors } = authContext
+  const { register, error, clearErrors, isAuthenticated } = authContext
 
   useEffect(() => {
+    if(isAuthenticated) {
+      props.history.push('/')
+    }
+
     if(error === 'El Usuario ya existe') {
       setAlert(error, 'danger')
       clearErrors()
     }
     //eslint-disable-next-line
-  }, [error])
+  }, [error, isAuthenticated, props.history])
 
   const [user, setUser] = useState({
     name: '',
