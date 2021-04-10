@@ -1,8 +1,10 @@
 import {
+  GET_ADVERTS,
   ADD_ADVERT,
   ADVERT_ERROR,
   DELETE_ADVERT,
   FILTER_ADVERTS,
+  CLEAR_ADVERTS,
   CLEAR_FILTER,
   SET_ALERT,
   REMOVE_ALERT,
@@ -11,15 +13,30 @@ import {
 //eslint-disable-next-line
 export default (state, action) => {
   switch (action.type) {
+    case GET_ADVERTS:
+      return {
+        ...state,
+        contacts: action.payload,
+        loading: false,
+      }
     case ADD_ADVERT:
       return {
         ...state,
         adverts: [...state.adverts, action.payload],
+        loading: false,
       }
     case DELETE_ADVERT:
       return {
         ...state,
         adverts: state.adverts.filter((advert) => advert.id !== action.payload),
+        loading: false,
+      }
+    case CLEAR_ADVERTS:
+      return {
+        ...state,
+        adverts: null,
+        filtered: null,
+        error: null,
       }
     case FILTER_ADVERTS:
       return {
@@ -37,7 +54,7 @@ export default (state, action) => {
     case ADVERT_ERROR:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       }
     default:
       return state

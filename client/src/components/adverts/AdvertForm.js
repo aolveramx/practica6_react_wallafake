@@ -8,7 +8,7 @@ const AdvertForm = () => {
 
   const [advert, setAdvert] = useState({
     name: '',
-    type: true,
+    type: '',
     price: '',
     tags: ''
   })
@@ -23,7 +23,7 @@ const AdvertForm = () => {
     advertContext.addAdvert(advert)
     setAdvert({
       name: '',
-      type: true,
+      type: '',
       price: '',
       tags: '',
     })
@@ -58,6 +58,18 @@ const AdvertForm = () => {
       </Form.Group>
 
       <Form.Group>
+      <Form.Label>Modalidad</Form.Label>
+        <Form.Control
+          type='text'
+          placeholder='Compra o Venta'
+          name='type'
+          value={type}
+          onChange={onChange}
+          required
+        />
+      </Form.Group>
+
+      {/* <Form.Group>
         <Form.Check
           inline
           type='radio'
@@ -76,7 +88,7 @@ const AdvertForm = () => {
           label='compra'
           onChange={onChange}
         />
-      </Form.Group>
+      </Form.Group> */}
 
       <Form.Group>
       <Form.Label>Categoria</Form.Label>

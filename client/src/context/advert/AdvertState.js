@@ -3,10 +3,12 @@ import axios from 'axios'
 import AdvertContext from './advertContext'
 import advertReducer from './advertReducer'
 import {
+  GET_ADVERTS,
   ADD_ADVERT,
   ADVERT_ERROR,
   DELETE_ADVERT,
   FILTER_ADVERTS,
+  CLEAR_ADVERTS,
   CLEAR_FILTER,
   SET_ALERT,
   REMOVE_ALERT,
@@ -14,19 +16,36 @@ import {
 
 const AdvertState = (props) => {
   const initialState = {
-    adverts: [],
+    adverts: null,
     filtered: null,
     error: null,
   }
 
   const [state, dispatch] = useReducer(advertReducer, initialState)
 
+  //Get Adverts
+  const getAdverts = async () => {
+    try {
+      const response = await axios.get('/api/adverts')
+
+      dispatch({
+        type: GET_ADVERTS,
+        payload: response.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: ADVERT_ERROR,
+        payload: error.response.message,
+      })
+    }
+  }
+
   //Add Advert
   const addAdvert = async (advert) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }
 
     try {
@@ -38,12 +57,10 @@ const AdvertState = (props) => {
       })
     } catch (error) {
       dispatch({
-        type: ADVERT_ERROR,
-        payload: error.response.message,
+        type: ADVERT_ERROR, 
+        payload: error.response.message 
       })
     }
-
-
   }
 
   //Delete Advert
@@ -51,6 +68,13 @@ const AdvertState = (props) => {
     dispatch({
       type: DELETE_ADVERT,
       payload: id,
+    })
+  }
+
+  //Clear Adverts
+  const clearAdverts = () => {
+    dispatch({
+      type: CLEAR_ADVERTS,
     })
   }
 
@@ -79,6 +103,8 @@ const AdvertState = (props) => {
         deleteAdvert,
         filterAdverts,
         clearFilter,
+        getAdverts,
+        clearAdverts,
       }}
     >
       {props.children}

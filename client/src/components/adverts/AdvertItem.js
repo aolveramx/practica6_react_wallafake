@@ -25,7 +25,7 @@ const AdvertItem = ({ advert }) => {
       </Card.Body>
       <ListGroup className='list-group-flush'>
         <ListGroupItem>
-          {type ? 'Venta' : 'Compra'}
+          {type}
         </ListGroupItem>
         <ListGroupItem>{price}</ListGroupItem>
         <ListGroupItem>

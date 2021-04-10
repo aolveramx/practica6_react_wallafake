@@ -10,8 +10,7 @@ const AdvertSchema = mongoose.Schema({
     required: true
   },
   type: {
-    type: Boolean,
-    default: true,
+    type: String,
     required: true
   },
   price: {

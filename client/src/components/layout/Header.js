@@ -1,6 +1,7 @@
 import { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
+import AdvertContext from '../../context/advert/advertContext'
 import { Button, Form, Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {
@@ -13,11 +14,14 @@ import PropTypes from 'prop-types'
 
 const Header = ({ title }) => {
   const authContext = useContext(AuthContext)
+  const advertContext = useContext(AdvertContext)
 
   const { isAuthenticated, logout, user } = authContext
+  const { clearAdverts } = advertContext
 
   const onLogout = () => {
     logout()
+    clearAdverts()
   }
 
   const authLinks = (
