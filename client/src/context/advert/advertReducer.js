@@ -16,19 +16,19 @@ export default (state, action) => {
     case GET_ADVERTS:
       return {
         ...state,
-        contacts: action.payload,
+        adverts: action.payload,
         loading: false,
       }
     case ADD_ADVERT:
       return {
         ...state,
-        adverts: [...state.adverts, action.payload],
+        adverts: [action.payload, ...state.adverts],
         loading: false,
       }
     case DELETE_ADVERT:
       return {
         ...state,
-        adverts: state.adverts.filter((advert) => advert.id !== action.payload),
+        adverts: state.adverts.filter((advert) => advert._id !== action.payload),
         loading: false,
       }
     case CLEAR_ADVERTS:

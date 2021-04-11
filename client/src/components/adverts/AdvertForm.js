@@ -8,12 +8,12 @@ const AdvertForm = () => {
 
   const [advert, setAdvert] = useState({
     name: '',
-    type: '',
+    sale: '',
     price: '',
     tags: ''
   })
 
-  const { name, type, price, tags } = advert
+  const { name, sale, price, tags } = advert
 
   const onChange = (e) =>
     setAdvert({ ...advert, [e.target.name]: e.target.value })
@@ -23,7 +23,7 @@ const AdvertForm = () => {
     advertContext.addAdvert(advert)
     setAdvert({
       name: '',
-      type: '',
+      sale: '',
       price: '',
       tags: '',
     })
@@ -43,8 +43,6 @@ const AdvertForm = () => {
         />
       </Form.Group>
 
-    
-
       <Form.Group>
       <Form.Label>Precio</Form.Label>
         <Form.Control
@@ -58,24 +56,23 @@ const AdvertForm = () => {
       </Form.Group>
 
       <Form.Group>
-      <Form.Label>Modalidad</Form.Label>
-        <Form.Control
+      <Form.Label className="mr-2">Modalidad</Form.Label>
+      
+      <Form.Control
           type='text'
-          placeholder='Compra o Venta'
-          name='type'
-          value={type}
+          placeholder='venta o compra'
+          name='sale'
+          value={sale}
           onChange={onChange}
           required
         />
-      </Form.Group>
 
-      {/* <Form.Group>
-        <Form.Check
+        {/* <Form.Check
           inline
           type='radio'
-          name='type'
-          value={type}
-          checked={type ? 'venta' : 'compra'}
+          name='venta'
+          value={sale === 'venta'}
+          checked={sale === 'venta'}
           label='venta'
           onChange={onChange}
         />
@@ -83,12 +80,13 @@ const AdvertForm = () => {
         <Form.Check
           inline
           type='radio'
-          name='type'
-          value={type}
+          name='compra'
+          value={sale === 'compra'}
+          checked={sale === 'compra'}
           label='compra'
           onChange={onChange}
-        />
-      </Form.Group> */}
+        /> */}
+      </Form.Group>
 
       <Form.Group>
       <Form.Label>Categoria</Form.Label>

@@ -14,8 +14,8 @@ const Adverts = () => {
     //eslint-disable-next-line
   }, [])
 
-  if (adverts !== null && adverts.lenght === 0 && !loading) {
-    return <h4>Publica un anucio!</h4>
+  if (adverts !== null && adverts.length === 0 && !loading) {
+    return <h4>No hay anuncios publicados, vuelve mas tarde o publica uno 🙄</h4>
   }
 
   return (

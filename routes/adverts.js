@@ -37,12 +37,12 @@ router.post(
       return res.status(400).json({ errors: errors.array() })
     }
 
-    const { name, type, price, tags  } = req.body
+    const { name, sale, price, tags  } = req.body
 
     try {
       const newAdvert = new Advert({
         name,
-        type,
+        sale,
         price,
         tags,
         user: req.user.id
@@ -64,12 +64,12 @@ router.post(
  * @access Private
  */
 router.put('/:id', auth, async (req, res) => {
-  const { name, type, price, tags } = req.body
+  const { name, sale, price, tags } = req.body
 
   //Build advert object
   const advertFields = {}
   if (name) advertFields.name = name
-  if (type) advertFields.type = type
+  if (sale) advertFields.sale = sale
   if (price) advertFields.price = price
   if (tags) advertFields.tags = tags
 

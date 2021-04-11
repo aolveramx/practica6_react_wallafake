@@ -64,11 +64,21 @@ const AdvertState = (props) => {
   }
 
   //Delete Advert
-  const deleteAdvert = (id) => {
-    dispatch({
-      type: DELETE_ADVERT,
-      payload: id,
-    })
+  const deleteAdvert = async (id) => {
+    try {
+      await axios.delete(`/api/adverts/${id}`)
+
+      dispatch({ 
+        type: 
+        DELETE_ADVERT, 
+        payload: id 
+      })
+    } catch (error) {
+      dispatch({ 
+        type: ADVERT_ERROR, 
+        payload: error.response.message 
+      })
+    }
   }
 
   //Clear Adverts

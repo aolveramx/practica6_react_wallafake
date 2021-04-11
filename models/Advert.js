@@ -9,8 +9,9 @@ const AdvertSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  type: {
+  sale: {
     type: String,
+    required: 'venta',
     required: true
   },
   price: {
