@@ -6,6 +6,7 @@
 
 const express = require('express')
 const connectDB = require('./config/db')
+const config = require('dotenv').config()
 
 const app = express()
 
@@ -16,7 +17,7 @@ connectDB()
 app.use(express.json({ extended: false }))
 
 app.get('/', (req, res) => {
-  res.json({ msg: 'Welcome to Wallafake' })
+  res.json({ msg: 'Welcome to Wallafake API' })
 })
 
 //Define Routes
