@@ -17,11 +17,11 @@ const AdvertItem = ({ advert }) => {
   }
 
   return (
-    <Card style={{ width: '18rem' }} className='my-2'>
+    <Card style={{ width: '100%' }} className='my-2'>
       <Card.Img variant='top' src={defaultIMG} />
       <Card.Body>
-        <Card.Title>{_id}</Card.Title>
-        <Card.Text>{name}</Card.Text>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text className='text-muted'>ID Publicación:{' '}{_id}</Card.Text>
       </Card.Body>
       <ListGroup className='list-group-flush'>
         <ListGroupItem>{sale === 'venta' ? 'venta' : 'compra'}</ListGroupItem>
