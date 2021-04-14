@@ -7,6 +7,7 @@ import {
   ADD_ADVERT,
   ADVERT_ERROR,
   DELETE_ADVERT,
+  UPDATE_ADVERT,
   SET_CURRENT,
   CLEAR_CURRENT,
   FILTER_ADVERTS,
@@ -82,6 +83,11 @@ const AdvertState = (props) => {
     }
   }
 
+  //Update Advert
+  const updateAdvert = (advert) => {
+    dispatch({ type: UPDATE_ADVERT, payload: advert })
+  }
+
   //Set Current Advert
   const setCurrent = (contact) => {
     dispatch({ type: SET_CURRENT, payload: contact })
@@ -125,6 +131,7 @@ const AdvertState = (props) => {
         deleteAdvert,
         setCurrent,
         clearCurrent,
+        updateAdvert,
         filterAdverts,
         clearFilter,
         getAdverts,

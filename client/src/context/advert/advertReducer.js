@@ -3,6 +3,7 @@ import {
   ADD_ADVERT,
   ADVERT_ERROR,
   DELETE_ADVERT,
+  UPDATE_ADVERT,
   SET_CURRENT,
   CLEAR_CURRENT,
   FILTER_ADVERTS,
@@ -32,6 +33,13 @@ export default (state, action) => {
           (advert) => advert._id !== action.payload
         ),
         loading: false,
+      }
+    case UPDATE_ADVERT:
+      return {
+        ...state,
+        adverts: state.adverts.map((advert) =>
+          advert.id === action.payload.id ? action.payload : advert
+        ),
       }
     case SET_CURRENT:
       return {

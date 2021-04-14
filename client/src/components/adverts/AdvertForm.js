@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import AdvertContext from '../../context/advert/advertContext'
 import { Button, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,11 +6,26 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const AdvertForm = () => {
   const advertContext = useContext(AdvertContext)
 
+  const { addAdvert, updateAdvert, current, clearCurrent } = advertContext
+
+  useEffect(() => {
+    if (current !== null) {
+      setAdvert(current)
+    } else {
+      setAdvert({
+        name: '',
+        sale: '',
+        price: '',
+        tags: '',
+      })
+    }
+  }, [advertContext, current])
+
   const [advert, setAdvert] = useState({
     name: '',
     sale: '',
     price: '',
-    tags: ''
+    tags: '',
   })
 
   const { name, sale, price, tags } = advert
@@ -20,17 +35,23 @@ const AdvertForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    advertContext.addAdvert(advert)
-    setAdvert({
-      name: '',
-      sale: '',
-      price: '',
-      tags: '',
-    })
+    if(current === null) {
+      addAdvert(advert)
+    } else {
+      updateAdvert(advert)
+    }
+    clearAll()
+  }
+
+  const clearAll = () => {
+    clearCurrent()
   }
 
   return (
     <Form onSubmit={onSubmit}>
+      <h2 className='text-center'>
+        {current ? 'Edita tu anuncio' : 'Publica un Anuncio'}
+      </h2>
       <Form.Group>
         <Form.Label>Título</Form.Label>
         <Form.Control
@@ -44,7 +65,7 @@ const AdvertForm = () => {
       </Form.Group>
 
       <Form.Group>
-      <Form.Label>Precio</Form.Label>
+        <Form.Label>Precio</Form.Label>
         <Form.Control
           type='text'
           placeholder='$900'
@@ -56,9 +77,9 @@ const AdvertForm = () => {
       </Form.Group>
 
       <Form.Group>
-      <Form.Label className="mr-2">Modalidad</Form.Label>
-      
-      <Form.Control
+        <Form.Label className='mr-2'>Modalidad</Form.Label>
+
+        <Form.Control
           type='text'
           placeholder='venta o compra'
           name='sale'
@@ -89,7 +110,7 @@ const AdvertForm = () => {
       </Form.Group>
 
       <Form.Group>
-      <Form.Label>Categoria</Form.Label>
+        <Form.Label>Categoria</Form.Label>
         <Form.Control
           type='text'
           placeholder='lifeStyle, work, mobile, motor'
@@ -99,7 +120,6 @@ const AdvertForm = () => {
           required
         />
       </Form.Group>
-
 
       {/* <Form.Group>
         <Form.Label>Sube una foto</Form.Label>
@@ -112,8 +132,13 @@ const AdvertForm = () => {
       </Form.Group> */}
 
       <Button variant='primary btn-block' type='submit'>
-        Publicar
+        {current ? 'Editar' : 'Publicar'}
       </Button>
+      {current && (
+        <Button variant='secondary btn-block' onClick={clearAll}>
+          Limpiar
+        </Button>
+      )}
     </Form>
   )
 }
