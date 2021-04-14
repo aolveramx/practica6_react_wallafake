@@ -7,15 +7,16 @@ import {
   ADD_ADVERT,
   ADVERT_ERROR,
   DELETE_ADVERT,
+  SET_CURRENT,
+  CLEAR_CURRENT,
   FILTER_ADVERTS,
   CLEAR_ADVERTS,
-  CLEAR_FILTER,
-  SET_ALERT,
-  REMOVE_ALERT,
+  CLEAR_FILTER
 } from '../types'
 
 const AdvertState = (props) => {
   const initialState = {
+    current:  null,
     adverts: null,
     filtered: null,
     error: null,
@@ -81,6 +82,16 @@ const AdvertState = (props) => {
     }
   }
 
+  //Set Current Advert
+  const setCurrent = (contact) => {
+    dispatch({ type: SET_CURRENT, payload: contact })
+  }
+
+  //Clear Current
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT })
+  }
+
   //Clear Adverts
   const clearAdverts = () => {
     dispatch({
@@ -107,10 +118,13 @@ const AdvertState = (props) => {
     <AdvertContext.Provider
       value={{
         adverts: state.adverts,
+        current: state.current,
         filtered: state.filtered,
         error: state.error,
         addAdvert,
         deleteAdvert,
+        setCurrent,
+        clearCurrent,
         filterAdverts,
         clearFilter,
         getAdverts,

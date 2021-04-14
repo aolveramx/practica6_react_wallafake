@@ -7,16 +7,16 @@ import defaultIMG from '../../img/DefaultIMGAdvert.png'
 
 const AdvertItem = ({ advert }) => {
   const advertContext = useContext(AdvertContext)
-  const { deleteAdvert } = advertContext
+  const { deleteAdvert, setCurrent, clearCurrent } = advertContext
 
   const { _id, name, sale, price, tags } = advert
 
   const onDelete = () => {
     deleteAdvert(_id)
+    clearCurrent()
   }
 
   return (
-
     <Card style={{ width: '18rem' }} className='my-2'>
       <Card.Img variant='top' src={defaultIMG} />
       <Card.Body>
@@ -24,16 +24,19 @@ const AdvertItem = ({ advert }) => {
         <Card.Text>{name}</Card.Text>
       </Card.Body>
       <ListGroup className='list-group-flush'>
-        <ListGroupItem>
-          {sale === 'venta' ? 'venta' : 'compra'}
-        </ListGroupItem>
+        <ListGroupItem>{sale === 'venta' ? 'venta' : 'compra'}</ListGroupItem>
         <ListGroupItem>{price}</ListGroupItem>
         <ListGroupItem>
           <Badge variant='info'>{tags}</Badge>
         </ListGroupItem>
       </ListGroup>
       <Card.Body>
-        <Button variant='danger' onClick={onDelete}>Eliminar</Button>
+        <Button variant='danger' onClick={onDelete}>
+          Eliminar
+        </Button>
+        <Button variant='secondary' onClick={() => setCurrent(advert)}>
+          Editar
+        </Button>
       </Card.Body>
     </Card>
   )
