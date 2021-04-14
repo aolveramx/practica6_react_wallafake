@@ -5,20 +5,20 @@ import advertReducer from './advertReducer'
 import {
   GET_ADVERTS,
   ADD_ADVERT,
-  ADVERT_ERROR,
   DELETE_ADVERT,
-  UPDATE_ADVERT,
   SET_CURRENT,
   CLEAR_CURRENT,
+  UPDATE_ADVERT,
   FILTER_ADVERTS,
   CLEAR_ADVERTS,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  ADVERT_ERROR,
 } from '../types'
 
 const AdvertState = (props) => {
   const initialState = {
-    current:  null,
     adverts: null,
+    current: null,
     filtered: null,
     error: null,
   }
@@ -59,8 +59,8 @@ const AdvertState = (props) => {
       })
     } catch (error) {
       dispatch({
-        type: ADVERT_ERROR, 
-        payload: error.response.message 
+        type: ADVERT_ERROR,
+        payload: error.response.message,
       })
     }
   }
@@ -70,32 +70,43 @@ const AdvertState = (props) => {
     try {
       await axios.delete(`/api/adverts/${id}`)
 
-      dispatch({ 
-        type: 
-        DELETE_ADVERT, 
-        payload: id 
+      dispatch({
+        type: DELETE_ADVERT,
+        payload: id,
       })
     } catch (error) {
-      dispatch({ 
-        type: ADVERT_ERROR, 
-        payload: error.response.message 
+      dispatch({
+        type: ADVERT_ERROR,
+        payload: error.response.message,
       })
     }
   }
 
   //Update Advert
-  const updateAdvert = (advert) => {
-    dispatch({ type: UPDATE_ADVERT, payload: advert })
-  }
+  const updateAdvert = async (advert) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
 
-  //Set Current Advert
-  const setCurrent = (contact) => {
-    dispatch({ type: SET_CURRENT, payload: contact })
-  }
+    try {
+      const response = await axios.put(
+        `/api/adverts/${advert._id}`,
+        advert,
+        config
+      )
 
-  //Clear Current
-  const clearCurrent = () => {
-    dispatch({ type: CLEAR_CURRENT })
+      dispatch({
+        type: UPDATE_ADVERT,
+        payload: response.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: ADVERT_ERROR,
+        payload: error.response.message,
+      })
+    }
   }
 
   //Clear Adverts
@@ -103,6 +114,19 @@ const AdvertState = (props) => {
     dispatch({
       type: CLEAR_ADVERTS,
     })
+  }
+
+  //Set Current Advert
+  const setCurrent = (advert) => {
+    dispatch({ 
+      type: SET_CURRENT, 
+      payload: advert 
+    })
+  }
+
+  //Clear Current
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT })
   }
 
   //Filter Adverts

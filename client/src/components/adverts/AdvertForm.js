@@ -39,6 +39,7 @@ const AdvertForm = () => {
       addAdvert(advert)
     } else {
       updateAdvert(advert)
+      window.location.reload()
     }
     clearAll()
   }
@@ -135,7 +136,7 @@ const AdvertForm = () => {
         {current ? 'Editar' : 'Publicar'}
       </Button>
       {current && (
-        <Button variant='secondary btn-block' onClick={clearAll}>
+        <Button variant='light btn-block' onClick={clearAll}>
           Limpiar
         </Button>
       )}

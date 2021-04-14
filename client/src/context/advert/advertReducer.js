@@ -1,14 +1,14 @@
 import {
   GET_ADVERTS,
   ADD_ADVERT,
-  ADVERT_ERROR,
   DELETE_ADVERT,
-  UPDATE_ADVERT,
   SET_CURRENT,
   CLEAR_CURRENT,
+  UPDATE_ADVERT,
   FILTER_ADVERTS,
   CLEAR_ADVERTS,
   CLEAR_FILTER,
+  ADVERT_ERROR,
 } from '../types'
 
 //eslint-disable-next-line
@@ -26,6 +26,14 @@ export default (state, action) => {
         adverts: [action.payload, ...state.adverts],
         loading: false,
       }
+    case UPDATE_ADVERT:
+      return {
+        ...state,
+        adverts: state.adverts.map((advert) =>
+          advert._id === action.payload._id ? action.payload : advert
+        ),
+        loading: false,
+      }
     case DELETE_ADVERT:
       return {
         ...state,
@@ -34,12 +42,13 @@ export default (state, action) => {
         ),
         loading: false,
       }
-    case UPDATE_ADVERT:
+    case CLEAR_ADVERTS:
       return {
         ...state,
-        adverts: state.adverts.map((advert) =>
-          advert.id === action.payload.id ? action.payload : advert
-        ),
+        adverts: null,
+        filtered: null,
+        error: null,
+        current: null,
       }
     case SET_CURRENT:
       return {
@@ -50,13 +59,6 @@ export default (state, action) => {
       return {
         ...state,
         current: null,
-      }
-    case CLEAR_ADVERTS:
-      return {
-        ...state,
-        adverts: null,
-        filtered: null,
-        error: null,
       }
     case FILTER_ADVERTS:
       return {
