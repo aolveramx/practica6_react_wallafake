@@ -14,7 +14,7 @@ const AdvertForm = () => {
     } else {
       setAdvert({
         name: '',
-        sale: '',
+        sale: 'venta',
         price: '',
         tags: '',
       })
@@ -23,12 +23,12 @@ const AdvertForm = () => {
 
   const [advert, setAdvert] = useState({
     name: '',
-    sale: '',
+    sale: 'venta',
     price: '',
     tags: '',
   })
 
-  const { name, sale, price, tags } = advert
+  const { name, sale, price } = advert
 
   const onChange = (e) =>
     setAdvert({ ...advert, [e.target.name]: e.target.value })
@@ -79,21 +79,11 @@ const AdvertForm = () => {
 
       <Form.Group>
         <Form.Label className='mr-2'>Modalidad</Form.Label>
-
-        <Form.Control
-          type='text'
-          placeholder='venta o compra'
-          name='sale'
-          value={sale}
-          onChange={onChange}
-          required
-        />
-
-        {/* <Form.Check
+        <Form.Check
           inline
           type='radio'
-          name='venta'
-          value={sale === 'venta'}
+          name='sale'
+          value='venta'
           checked={sale === 'venta'}
           label='venta'
           onChange={onChange}
@@ -102,25 +92,51 @@ const AdvertForm = () => {
         <Form.Check
           inline
           type='radio'
-          name='compra'
-          value={sale === 'compra'}
+          name='sale'
+          value='compra'
           checked={sale === 'compra'}
           label='compra'
           onChange={onChange}
-        /> */}
+        />
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Categoria</Form.Label>
-        <Form.Control
-          type='text'
-          placeholder='lifeStyle, work, mobile, motor'
+        <Form.Label className='mr-2'>Categoria</Form.Label>
+
+        <Form.Check
+          inline
+          type='radio'
           name='tags'
-          value={tags}
+          value='lifeStyle'
+          // checked={tags === 'lifeStyle'}
+          label='lifeStyle'
           onChange={onChange}
-          required
         />
-      </Form.Group>
+        <Form.Check
+          inline
+          type='radio'
+          name='tags'
+          value='work'
+          label='work'
+          onChange={onChange}
+        />
+        <Form.Check
+          inline
+          type='radio'
+          name='tags'
+          value='mobile'
+          label='mobile'
+          onChange={onChange}
+        />
+        <Form.Check
+          inline
+          type='radio'
+          name='tags'
+          value='motor'
+          label='motor'
+          onChange={onChange}
+        />
+        </Form.Group>
 
       {/* <Form.Group>
         <Form.Label>Sube una foto</Form.Label>

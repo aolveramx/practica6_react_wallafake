@@ -11,8 +11,7 @@ const AdvertSchema = mongoose.Schema({
   },
   sale: {
     type: String,
-    required: 'venta',
-    required: true
+    default: 'venta'
   },
   price: {
     type: String,

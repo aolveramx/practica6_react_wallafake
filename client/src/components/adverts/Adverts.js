@@ -21,7 +21,7 @@ const Adverts = () => {
 
   return (
     <Fragment>
-      <Scrollbars style={{ width:'100%', height:'200%'}}>
+      <Scrollbars style={{ width:'100%', height:'200%'}} autoHide>
       {adverts !== null && !loading ? (
         <TransitionGroup>
           {filtered !== null

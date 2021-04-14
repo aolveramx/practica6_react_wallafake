@@ -20,12 +20,14 @@ const AdvertItem = ({ advert }) => {
     <Card style={{ width: '100%' }} className='my-2'>
       <Card.Img variant='top' src={defaultIMG} />
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title className='text-primary'>{name}</Card.Title>
         <Card.Text className='text-muted'>ID Publicación:{' '}{_id}</Card.Text>
       </Card.Body>
       <ListGroup className='list-group-flush'>
-        <ListGroupItem>{sale === 'venta' ? 'venta' : 'compra'}</ListGroupItem>
-        <ListGroupItem>{price}</ListGroupItem>
+        <ListGroupItem>
+          <Badge variant={sale === 'venta' ? 'success' : 'danger' }>{sale === 'venta' ? 'venta' : 'compra'}</Badge>
+        </ListGroupItem>
+        <ListGroupItem className='text-primary'>{price}</ListGroupItem>
         <ListGroupItem>
           <Badge variant='info'>{tags}</Badge>
         </ListGroupItem>
@@ -34,7 +36,7 @@ const AdvertItem = ({ advert }) => {
         <Button variant='danger' onClick={onDelete}>
           Eliminar
         </Button>
-        <Button variant='secondary' onClick={() => setCurrent(advert)}>
+        <Button variant='outline-secondary' onClick={() => setCurrent(advert)}>
           Editar
         </Button>
       </Card.Body>
